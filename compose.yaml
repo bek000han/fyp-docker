@@ -7,7 +7,7 @@ services:
       - router
     networks:
       - network1   
-    command: tail -f /dev/null #ip route add 10.10.2.0/24 via 10.10.1.254 dev eth0
+    entrypoint: tail -f /dev/null #ip route add 10.10.2.0/24 via 10.10.1.254 dev eth0
     cap_add: 
       - NET_ADMIN
   client2:
@@ -18,7 +18,7 @@ services:
       - router
     networks:
       - network2
-    command: tail -f /dev/null #ip route add 10.10.1.0/24 via 10.10.2.254 dev eth0
+    entrypoint: tail -f /dev/null #ip route add 10.10.1.0/24 via 10.10.2.254 dev eth0
     cap_add: 
       - NET_ADMIN
   router:
