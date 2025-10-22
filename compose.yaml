@@ -1,0 +1,47 @@
+services:
+  client1:
+    tty: true
+    stdin_open: true 
+    build: .
+    depends_on:
+      - router
+    networks:
+      - network1   
+    command: tail -f /dev/null #ip route add 10.10.2.0/24 via 10.10.1.254 dev eth0
+    cap_add: 
+      - NET_ADMIN
+  client2:
+    tty: true
+    stdin_open: true 
+    build: .
+    depends_on:
+      - router
+    networks:
+      - network2
+    command: tail -f /dev/null #ip route add 10.10.1.0/24 via 10.10.2.254 dev eth0
+    cap_add: 
+      - NET_ADMIN
+  router:
+    build: .
+    tty: true
+    networks:
+      network1:
+        ipv4_address: 10.10.1.254
+      network2: 
+        ipv4_address: 10.10.2.254
+    cap_add: 
+      - NET_ADMIN
+
+networks:
+  network1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "10.10.1.0/24"
+          gateway: "10.10.1.1"
+  network2:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "10.10.2.0/24"
+          gateway: "10.10.2.1"
