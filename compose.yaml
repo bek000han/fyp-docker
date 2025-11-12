@@ -4,6 +4,7 @@ services:
     stdin_open: true 
     container_name: client1
     build: .
+    privileged: true
     depends_on:
       - router
     networks:
