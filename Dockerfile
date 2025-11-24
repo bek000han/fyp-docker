@@ -6,6 +6,7 @@ RUN apt install iproute2 -y
 RUN apt install iputils-ping -y
 RUN apt install net-tools -y
 RUN apt install tcpdump -y
+RUN apt remove iperf3 libiperf0
 RUN apt install libsctp1
 RUN apt install wget
 RUN wget https://launchpad.net/ubuntu/+archive/primary/+files/iperf3_3.20-2_amd64.deb
