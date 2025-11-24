@@ -11,4 +11,4 @@ RUN apt install libsctp1 -y
 RUN apt install wget -y
 RUN wget https://launchpad.net/ubuntu/+archive/primary/+files/iperf3_3.20-2_amd64.deb
 RUN wget https://launchpad.net/ubuntu/+archive/primary/+files/libiperf0_3.20-2_amd64.deb
-RUN sudo dpkg -i libiperf0_3.20-2_amd64.deb iperf3_3.20-2_amd64.deb
+RUN sudo dpkg -i libiperf0_3.20-2_amd64.deb iperf3_3.20-2_amd64.deb -y
