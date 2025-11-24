@@ -10,8 +10,13 @@ services:
     networks:
       - network1
       - network2   
-    command: sh -c "ip route add 10.10.3.0/24 via 10.10.1.254 
-                    && ip route delete default 
+    command: sh -c "ip route delete default
+                    && ip rule add from 10.10.1.2 table 1
+                    && ip rule add from 10.10.2.2 table 2
+                    && ip route add 10.10.1.0/24 dev eth0 scope link table 1
+                    && ip route add 10.10.2.0/24 dev eth1 scope link table 2
+                    && ip mptcp limits set subflow 2 add_addr_accepted 2
+                    && ip mptcp endpoint add 10.10.2.2 dev eno1 signal
                     && tail -f /dev/null"
     cap_add: 
       - NET_ADMIN
@@ -25,7 +30,15 @@ services:
       - router
     networks:
       - network3
-    command: sh -c "ip route add 10.10.1.0/24 via 10.10.3.254 && ip route add 10.10.2.0/24 via 10.10.3.254 && ip route delete default && tail -f /dev/null" 
+      - network4
+    command: sh -c "ip route delete default
+                    && ip rule add from 10.10.3.2 table 1
+                    && ip rule add from 10.10.4.2 table 2
+                    && ip route add 10.10.3.0/24 dev eth0 scope link table 1
+                    && ip route add 10.10.4.0/24 dev eth1 scope link table 2
+                    && ip mptcp limits set subflow 2 add_addr_accepted 2
+                    && ip mptcp endpoint add 10.10.4.2 dev eno1 signal
+                    && tail -f /dev/null" 
     cap_add: 
       - NET_ADMIN
   router:
