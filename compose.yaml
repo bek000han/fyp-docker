@@ -10,9 +10,7 @@ services:
     networks:
       - network1
       - network2   
-    # command: sh -c "tail -f /dev/null"
-    #ip route add 10.10.3.0/24 via 10.10.1.254 
-    #ip route add 10.10.3.0/24 via 10.10.2.254 
+    command: sh -c "ip route add 10.10.3.0/24 via 10.10.1.254 && tail -f /dev/null"
     cap_add: 
       - NET_ADMIN
   client2:
@@ -25,9 +23,7 @@ services:
       - router
     networks:
       - network3
-    # command: sh -c "tail -f /dev/null" 
-    #ip route add 10.10.1.0/24 via 10.10.3.254 
-    #ip route add 10.10.2.0/24 via 10.10.3.254 
+    command: sh -c "ip route add 10.10.1.0/24 via 10.10.3.254 && ip route add 10.10.2.0/24 via 10.10.3.254 && tail -f /dev/null" 
     cap_add: 
       - NET_ADMIN
   router:
