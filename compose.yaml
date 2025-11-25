@@ -56,10 +56,10 @@ services:
       network4:
         ipv4_address: 10.10.4.254
     command: sh -c "ip route delete default
-                    && ip route add 10.10.3.0/24 via 10.10.3.2 
-                    && ip route add 10.10.4.0/24 via 10.10.4.2 
-                    && ip route add 10.10.1.0/24 via 10.10.1.2
-                    && ip route add 10.10.2.0/24 via 10.10.2.2
+                    && ip route add 10.10.1.0/24 dev eth0
+                    && ip route add 10.10.2.0/24 dev eth1 
+                    && ip route add 10.10.3.0/24 dev eth2
+                    && ip route add 10.10.4.0/24 dev eth3
                     && tail -f /dev/null"
     cap_add: 
       - NET_ADMIN
