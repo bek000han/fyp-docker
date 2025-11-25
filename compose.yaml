@@ -60,7 +60,7 @@ services:
                     && ip rule add from 10.10.2.2 table 2
                     && ip rule add from 10.10.3.2 table 3
                     && ip rule add from 10.10.4.2 table 4
-                    && ip route add 10.10.3.0/24 via 10.10.3.2 table 1
+                    && ip route add 10.10.3.0/24 dev eth2 scope link table 1
                     && ip route add 10.10.4.0/24 via 10.10.4.2 table 2
                     && ip route add 10.10.1.0/24 via 10.10.1.2 table 3
                     && ip route add 10.10.2.0/24 via 10.10.2.2 table 4
